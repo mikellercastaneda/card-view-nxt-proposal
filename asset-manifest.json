@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/card-view-nxt-proposal/static/css/main.9d00d98c.chunk.css",
+    "main.js": "/card-view-nxt-proposal/static/js/main.2e991aec.chunk.js",
+    "main.js.map": "/card-view-nxt-proposal/static/js/main.2e991aec.chunk.js.map",
+    "runtime-main.js": "/card-view-nxt-proposal/static/js/runtime-main.09bafb79.js",
+    "runtime-main.js.map": "/card-view-nxt-proposal/static/js/runtime-main.09bafb79.js.map",
+    "static/js/2.8b80a19b.chunk.js": "/card-view-nxt-proposal/static/js/2.8b80a19b.chunk.js",
+    "static/js/2.8b80a19b.chunk.js.map": "/card-view-nxt-proposal/static/js/2.8b80a19b.chunk.js.map",
+    "index.html": "/card-view-nxt-proposal/index.html",
+    "precache-manifest.4da04e19cd2c51e0ec9d61ac719dd73c.js": "/card-view-nxt-proposal/precache-manifest.4da04e19cd2c51e0ec9d61ac719dd73c.js",
+    "service-worker.js": "/card-view-nxt-proposal/service-worker.js",
+    "static/css/main.9d00d98c.chunk.css.map": "/card-view-nxt-proposal/static/css/main.9d00d98c.chunk.css.map",
+    "static/js/2.8b80a19b.chunk.js.LICENSE.txt": "/card-view-nxt-proposal/static/js/2.8b80a19b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.09bafb79.js",
+    "static/js/2.8b80a19b.chunk.js",
+    "static/css/main.9d00d98c.chunk.css",
+    "static/js/main.2e991aec.chunk.js"
+  ]
+}
