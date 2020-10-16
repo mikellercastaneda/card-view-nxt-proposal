@@ -7,7 +7,7 @@ const CardInput = ({ label, value }) => {
         <label>{label}</label>
       </div>
       <div className="card-input_body">
-        <input type="text" value={value} onChange={() => { }} />
+        <input type="text" defaultValue={value} onChange={() => { }} />
       </div>
     </div>
   );

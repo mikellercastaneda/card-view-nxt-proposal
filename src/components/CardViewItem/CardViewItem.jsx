@@ -1,12 +1,26 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+// Redux
+import { getCards } from '../../store/actions/cardsActions';
+import { connect } from 'react-redux';
+//Components
 import CardInput from '../CardInput/CardInput'
+//Utils
+import { uniqueId } from 'lodash-es';
 
-const CardViewItem = ({ title, subtitle }) => {
+const CardViewItem = ({ title, subtitle, getCards }) => {
+  //checar la doc de useEffect, hay veces que no se debeusar la dependencia
+  const cardViewItemKey = uniqueId();
+  useEffect(() => {
+    getCards()
+    // eslint-disable-next-line
+  }, []);
   return (
-    <>
-      <div className="card-view-item">
-        <p className="card-view-item_title">{title}</p>
+    <div className="card-view-item accordion">
+      <input type="checkbox" name="collapse" id={cardViewItemKey} defaultChecked />
+      <h2 className="handle">
+        <label className="card-view-item_title" htmlFor={cardViewItemKey}>{title}</label>
+      </h2>
+      <div className="content">
         <p className="card-view-item_sub-title">{subtitle}</p>
         <div className="card-view-item_dates-grid">
           <CardInput label="13-OCT" value="80" />
@@ -31,8 +45,14 @@ const CardViewItem = ({ title, subtitle }) => {
           <CardInput label="TIER_BONUS" value="0.0" />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default CardViewItem;
+// First param of the arr is the prop, second is the param of the index reducer
+const mapStateToProps = state => ({
+  cards: state.cards
+});
+
+// Object as a second param of any action 
+export default connect(mapStateToProps, { getCards })(CardViewItem);
