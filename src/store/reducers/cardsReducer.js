@@ -4,7 +4,12 @@ import {
 } from '../actions/types';
 //declare initalState
 const initialState = {
-  cards: null
+  cards: {
+    hubs: {},
+    lanes: {}
+  },
+  order: 'asc',
+  orderBy: 'HUB'
 };
 //switch action type and exports
 export default (state = initialState, action) => {
