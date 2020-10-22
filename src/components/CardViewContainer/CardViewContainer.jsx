@@ -18,7 +18,7 @@ const CardViewContainer = ({ cards, getCards }) => {
     <>
       {
         !Object.keys(cards.hubs).length ?
-          <p>EMPTY CARDS HUBS</p> :
+          <h4>Loading...</h4> :
           Object.entries(cards.hubs).map(([key, value]) =>
             <CardViewItem key={uniqueId()} title={key} item={value} />
           )

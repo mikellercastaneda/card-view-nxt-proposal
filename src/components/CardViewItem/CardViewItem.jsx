@@ -6,7 +6,6 @@ import { uniqueId } from 'lodash-es';
 
 const CardViewItem = ({ title, item }) => {
   const cardViewItemKey = uniqueId();
-  console.log(item);
   return (
     <div className="card-view-item accordion">
       <input type="checkbox" name="collapse" id={cardViewItemKey} defaultChecked />
