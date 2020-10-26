@@ -5,14 +5,18 @@
   background-color: $card-input-main-color;
 }
 
+.card-input-section {
+  height: 22px;
+  font-weight: 400;
+  font-size: 0.7em;
+}
+
 .card-input_header {
-  height: 30px;
+  @extend .card-input-section;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 400;
-  font-size: 0.8em;
 }
 
 .card-input_body {
@@ -22,12 +26,11 @@
 }
 
 .card-input_body input {
+  @extend .card-input-section;
   width: 100%;
-  height: 30px;
   border-radius: 4px;
   border: 1px solid $card-input-main-color;
   outline-color: $card-input-focus-color;
   text-align: center;
-  font-weight: 400;
-  font-size: 0.8em;
+  
 }

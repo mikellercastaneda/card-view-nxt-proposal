@@ -4,8 +4,12 @@ $padding-base: 10px;
 
 .card {
   border-radius: 6px;
-  border: 2px solid $card-color;
+  border: .15em solid $card-color;
   padding: $padding-base;
+  margin-top: $space-base;
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
 .card-title {
@@ -24,6 +28,7 @@ $padding-base: 10px;
   grid-template-rows: 1fr;
   grid-column-gap: $space-base/2;
   grid-row-gap: $space-base/2;
+  margin-top: $space-base/2;
 }
 
 .card-dates-grid {
