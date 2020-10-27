@@ -1,6 +1,7 @@
 //import action types
 import {
-  GET_CARDS
+  GET_CARDS,
+  ADD_ADJUSTMENT
 } from '../actions/types';
 //declare initalState
 const initialState = {
@@ -8,6 +9,7 @@ const initialState = {
     hubs: {},
     lanes: {}
   },
+  adjustments: [],
   order: 'asc',
   orderBy: 'HUB'
 };
@@ -18,6 +20,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         cards: action.payload
+      };
+    case ADD_ADJUSTMENT:
+      return {
+        ...state,
+        adjustments: [
+          ...state.adjustments,
+          action.payload
+        ]
       };
     default:
       return state;

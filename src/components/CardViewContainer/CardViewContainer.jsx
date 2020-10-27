@@ -14,19 +14,19 @@ const CardViewContainer = ({ cards, getCards }) => {
     // eslint-disable-next-line
   }, []);
 
+  const getHubLanes = (hubName) => (
+    Object.entries(cards.lanes).filter(([laneName, lane]) =>
+      lane[0]['OHUB'] === hubName
+    )
+  );
+
   return (
     <>
-      {
-        !Object.keys(cards.hubs).length && !Object.keys(cards.lanes).length ?
-          <h4>Loading...</h4> :
-          Object.entries(cards.hubs).map(([hubName, hub]) => (
-            < CardViewItem key={uniqueId()} title={hubName} hub={hub} lanes={
-              Object.entries(cards.lanes)
-                .filter(([laneName, lane]) =>
-                  lane[0]['OHUB'] === hubName
-                )
-            } />
-          ))
+      {!Object.keys(cards.hubs).length && !Object.keys(cards.lanes).length ?
+        <h4>Loading...</h4> :
+        Object.entries(cards.hubs).map(([hubName, hub]) => (
+          < CardViewItem key={uniqueId()} title={hubName} hub={hub} lanes={getHubLanes(hubName)} />
+        ))
       }
     </>
   );

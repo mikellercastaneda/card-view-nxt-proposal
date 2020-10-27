@@ -1,9 +1,10 @@
 //import axios from 'axios';
-
 //import actionTypes
 import {
-  GET_CARDS
+  GET_CARDS,
+  ADD_ADJUSTMENT
 } from './types';
+
 //export functions and dispatchers
 //dispatchers is for integration
 export const getCards = () => {
@@ -8938,5 +8939,16 @@ export const getCards = () => {
     }
   };
 };
+
+export const addAdjustment = (value) => {
+  return {
+    type: ADD_ADJUSTMENT,
+    payload: {
+      hub: 'ATLANTA',
+      name: 'hubIlodAvg',
+      value: value
+    }
+  }
+}
 
 //line 11 add payload with the fake json response body of the cards
