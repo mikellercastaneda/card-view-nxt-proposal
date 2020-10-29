@@ -2,7 +2,8 @@
 //import actionTypes
 import {
   GET_CARDS,
-  ADD_ADJUSTMENT
+  SET_VALUE_CHANGED,
+  RESET_VALUE
 } from './types';
 
 //export functions and dispatchers
@@ -8940,15 +8941,16 @@ export const getCards = () => {
   };
 };
 
-export const addAdjustment = (value) => {
+export const setValueChanged = (value) => {
   return {
-    type: ADD_ADJUSTMENT,
-    payload: {
-      hub: 'ATLANTA',
-      name: 'hubIlodAvg',
-      value: value
-    }
+    type: SET_VALUE_CHANGED,
+    payload: value
   }
-}
+};
 
-//line 11 add payload with the fake json response body of the cards
+export const resetValue = (value) => {
+  return {
+    type: RESET_VALUE,
+    payload: value
+  }
+};

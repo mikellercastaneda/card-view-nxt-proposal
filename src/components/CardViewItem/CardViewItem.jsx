@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Redux
-import { addAdjustment } from '../../store/actions/cardsActions';
+import { setValueChanged, resetValue } from '../../store/actions/cardsActions';
 import { connect } from 'react-redux';
 //Components
 import CardInput from '../CardInput/CardInput'
@@ -22,35 +22,56 @@ const LABELS_DICTIONARY = {
   WEEKLY_CAP: 'WEEKLY CAP'
 }
 
-const CardViewItem = ({ title, hub, lanes, addAdjustment }) => {
+const CardViewItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
   const cardKey = uniqueId();
 
-  const [hasChanged, setHasChanged] = useState(false);
-
   const handleChange = event => {
-    console.log(event.target.value);
-    //add change to the state
-    addAdjustment(event.target.value);
-    setHasChanged(true);
+    setValueChanged({
+      "valueChanged": event.target.value,
+      "name": event.target.dataset.name,
+      "dt": event.target.dataset.dt,
+      "hub": event.target.dataset.hub
+    });
+  }
+
+  const handleReset = event => {
+    console.log(event.target);
+    resetValue({
+      "name": event.target.dataset.name,
+      "dt": event.target.dataset.dt,
+      "hub": event.target.dataset.hub
+    });
   }
 
   const displayHubCapacityInputs = (hub) => (
     hub.filter(({ name }) => name === 'hubCapacity')
-      .map(({ dt, value }) =>
+      .map(({ HUB, name, dt, value, valueChanged }) =>
         <CardInput
           key={uniqueId()}
           label={dt}
-          value={Number(value).toFixed(2)}
-          hasChanged={hasChanged}
+          value={Number(valueChanged ? valueChanged : value).toFixed(2)}
           handleChange={handleChange}
+          handleReset={handleReset}
+          hasChanged={valueChanged ? true : false}
+          hub={HUB}
+          name={name}
+          dt={dt}
         />
       )
   );
 
   const displayHubInputs = (hub) => (
     hub.filter(({ name }) => name !== 'hubCapacity')
-      .map(({ name, value }) =>
-        <CardInput key={uniqueId()} label={LABELS_DICTIONARY[name]} value={value} />
+      .map(({ HUB, name, value, valueChanged }) =>
+        <CardInput
+          key={uniqueId()}
+          label={LABELS_DICTIONARY[name]}
+          value={valueChanged ? valueChanged : value}
+          hasChanged={valueChanged ? true : false}
+          handleChange={handleChange}
+          hub={HUB}
+          name={name}
+        />
       )
   );
 
@@ -66,8 +87,14 @@ const CardViewItem = ({ title, hub, lanes, addAdjustment }) => {
             </h2>
             <div className="accordion-content">
               <div className="card-dates-grid">
-                {lane.map(({ name, value }) =>
-                  <CardInput key={uniqueId()} label={LABELS_DICTIONARY[name]} value={value} />
+                {lane.map(({ name, value, valueChanged }) =>
+                  <CardInput
+                    key={uniqueId()}
+                    label={LABELS_DICTIONARY[name]}
+                    value={value}
+                    hasChanged={valueChanged ? true : false}
+                    handleChange={handleChange}
+                  />
                 )}
               </div>
             </div>
@@ -99,8 +126,4 @@ const CardViewItem = ({ title, hub, lanes, addAdjustment }) => {
   );
 }
 
-const mapStateToProps = state => ({
-  adjustments: state.cardsReducer.adjustments
-});
-
-export default connect(mapStateToProps, { addAdjustment })(CardViewItem);
+export default connect(null, { setValueChanged, resetValue })(CardViewItem);
