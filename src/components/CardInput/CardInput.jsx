@@ -6,7 +6,7 @@ const CardInput = ({
   handleChange,
   handleReset,
   hasChanged,
-  hub,
+  parent,
   name,
   dt
 }) => {
@@ -18,7 +18,7 @@ const CardInput = ({
       <div className="card-input-content">
         <input
           type="text"
-          data-hub={hub}
+          data-parent={parent}
           data-name={name}
           data-dt={dt}
           defaultValue={value}
@@ -27,13 +27,11 @@ const CardInput = ({
       </div>
       <div
         className="card-input-changed-reset-button"
-        data-hub={hub}
+        onClick={handleReset}
+        data-parent={parent}
         data-name={name}
         data-dt={dt}
-        onClick={handleReset}
-      >
-        <i className="fas fa-undo-alt fa-xs"></i>
-      </div>
+      ></div>
     </div>
   );
 }

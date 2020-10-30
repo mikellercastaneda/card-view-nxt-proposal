@@ -30,16 +30,15 @@ const CardViewItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
       "valueChanged": event.target.value,
       "name": event.target.dataset.name,
       "dt": event.target.dataset.dt,
-      "hub": event.target.dataset.hub
+      "cardName": event.target.dataset.parent
     });
   }
 
   const handleReset = event => {
-    console.log(event.target);
     resetValue({
       "name": event.target.dataset.name,
       "dt": event.target.dataset.dt,
-      "hub": event.target.dataset.hub
+      "cardName": event.target.dataset.parent
     });
   }
 
@@ -53,7 +52,7 @@ const CardViewItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
           handleChange={handleChange}
           handleReset={handleReset}
           hasChanged={valueChanged ? true : false}
-          hub={HUB}
+          parent={HUB}
           name={name}
           dt={dt}
         />
@@ -69,7 +68,8 @@ const CardViewItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
           value={valueChanged ? valueChanged : value}
           hasChanged={valueChanged ? true : false}
           handleChange={handleChange}
-          hub={HUB}
+          handleReset={handleReset}
+          parent={HUB}
           name={name}
         />
       )
@@ -91,9 +91,12 @@ const CardViewItem = ({ title, hub, lanes, setValueChanged, resetValue }) => {
                   <CardInput
                     key={uniqueId()}
                     label={LABELS_DICTIONARY[name]}
-                    value={value}
+                    value={valueChanged ? valueChanged : value}
                     hasChanged={valueChanged ? true : false}
                     handleChange={handleChange}
+                    handleReset={handleReset}
+                    parent={laneName}
+                    name={name}
                   />
                 )}
               </div>

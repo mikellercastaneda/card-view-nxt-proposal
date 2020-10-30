@@ -46,7 +46,7 @@ $card-input-border-radius: 4px;
     color: white;
     border: 1px solid black;
     border-radius: 10px;
-    font-size: .7em;
+    font-size: .5em;
     position: absolute;
     top: -10%;
     right: -3%;
@@ -57,6 +57,12 @@ $card-input-border-radius: 4px;
     height: 18px;
     cursor: pointer;
     z-index: 1;
+  }
+  &-reset-button::after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: white;
+    content: "\f2ea";
   }
   &:hover {
     .card-input-changed-reset-button {
