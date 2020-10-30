@@ -34,60 +34,50 @@ export default (state = initialState, action) => {
         cards: action.payload
       };
     case SET_VALUE_CHANGED:
+      const setValueType = isLane(action.payload.cardName) ? "lanes" : "hubs";
 
-      const property = isLane(action.payload.cardName) ? "lanes" : "hubs";
-
-      const parmIndex = state.cards[property][action.payload.cardName]
-        .findIndex(({ name, dt }) =>
-          name === 'hubCapacity' ?
-            (name === action.payload.name && dt === action.payload.dt) :
-            (name === action.payload.name));
-
-      let newCards = {
+      const setChangedState = {
+        ...state,
         cards: {
-          hubs: {
-            ...state.cards.hubs
-          },
-          lanes: {
-            ...state.cards.lanes
+          ...state.cards,
+          [setValueType]: {
+            ...state.cards[setValueType],
+            [action.payload.cardName]: [
+              ...state.cards[setValueType][action.payload.cardName].map((v, i) => {
+                if (i === getInputIndex(state, action.payload) &&
+                  Number(v.value).toFixed(2) !== action.payload.valueChanged) {
+                  v.valueChanged = action.payload.valueChanged;
+                }
+                return v;
+              })
+            ]
           }
         }
-      }
-
-      newCards.cards[property][action.payload.cardName][parmIndex] = {
-        ...state.cards[property][action.payload.cardName][parmIndex],
-        "valueChanged": action.payload.valueChanged
       };
 
-      // Reflect.defineProperty(newCards.cards.hubs[action.payload.cardName][parmIndex], 'property1', { value: 42 });
-
-      return {
-        ...state,
-        cards: newCards.cards
-      };
+      return setChangedState;
     case RESET_VALUE:
+      const resetValueType = isLane(action.payload.cardName) ? "lanes" : "hubs";
 
-      let newState = {
+      const resetValueState = {
+        ...state,
         cards: {
-          hubs: {
-            ...state.cards.hubs
-          },
-          lanes: {
-            ...state.cards.lanes
+          ...state.cards,
+          [resetValueType]: {
+            ...state.cards[resetValueType],
+            [action.payload.cardName]: [
+              ...state.cards[resetValueType][action.payload.cardName].map((v, i) => {
+                if (i === getInputIndex(state, action.payload)) {
+                  delete v.valueChanged
+                }
+                return v;
+              })
+            ]
           }
         }
-      }
-
-      Reflect.deleteProperty(newState.cards[
-        isLane(action.payload.cardName) ? "lanes" : "hubs"
-      ][action.payload.cardName][
-        getInputIndex(state, action.payload)
-      ], "valueChanged");
-
-      return {
-        ...state,
-        cards: newState.cards
       };
+
+      return resetValueState;
     default:
       return state;
   }
